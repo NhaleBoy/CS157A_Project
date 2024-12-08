@@ -8,7 +8,7 @@ import java.util.Enumeration;
 
 public class Database {
 	// we prolly wont use a main
-	protected static final String URL = "jdbc:mysql://localhost:3306/Demo";
+	protected static final String URL = "jdbc:mysql://localhost:3306/MusicApp";
     protected static final String USER = "root";
     protected static final String PASSWORD = ""; //unsure
 	
