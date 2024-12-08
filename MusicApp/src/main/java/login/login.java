@@ -1,5 +1,6 @@
-package Login;
+package login;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,14 +12,14 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class nameCheck
  */
-@WebServlet("/nameCheck")
-public class nameCheck extends HttpServlet {
+@WebServlet("/login")
+public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public nameCheck() {
+    public login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,17 +28,7 @@ public class nameCheck extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			String name = request.getParameter("name");
-			out.println("<br>");
-			out.println(name);
-		}
-		catch(Exception e){
-			out.println("Error: " + e.getMessage());
-		}
+		
 		
 	}
 
@@ -46,7 +37,19 @@ public class nameCheck extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setContentType("text/html");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			String name = request.getParameter("name");
+			request.setAttribute("name", name);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
+			rd.forward(request, response);
+		}
+		catch(Exception e){
+			out.println("Error: " + e.getMessage());
+		}
 	}
 
 }
