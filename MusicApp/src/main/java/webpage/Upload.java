@@ -49,7 +49,7 @@ public class Upload extends HttpServlet {
 				 try {
 					int id = (int) request.getSession().getAttribute("userId");
 					AudioDAO dao = new AudioDAO();
-					dao.addAudio(new Audio(fileName, id, genre, category, "C:\\upload\\" + fileName ));
+					dao.addAudio(new Audio(fileName, id, genre, category, "upload\\" + fileName ));
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
