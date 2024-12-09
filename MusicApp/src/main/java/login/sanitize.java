@@ -18,11 +18,6 @@ public class sanitize {
         return input.trim();
     }
 	
-	// Sanitize input by removing SQL injection risky characters
-    public static String sanitizeSql(String input) {
-        if (input == null) return "";
-        return input.replaceAll("([';--])", "");  // Basic example: remove single quotes, semicolons, and comment syntax
-    }
     
     public static boolean isValidEmail(String email) {
         if (email == null) return false;

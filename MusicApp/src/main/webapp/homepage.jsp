@@ -9,7 +9,7 @@
 </head>
 <body>
 	<%
-		String name = request.getAttribute("name").toString();
+		String name = request.getAttribute("username").toString();
 	 	out.println(name);
 	 	out.println("<br>");
 	 	out.println("complete");

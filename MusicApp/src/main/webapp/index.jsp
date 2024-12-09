@@ -1,14 +1,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="login.css" type="text/css">
+<title>Please enter Login/Sign up</title>
 </head>
 <body>
-	<form method=post action=login>
-	Enter name: <input type=text name=name>
-	Enter
-	<br><br>
-	<input type=submit value="submit">
-	</form>
+	<div class=center>
+		<div class=login>
+			<h1>Login</h1>
+			<form method=post action=login>
+			<input type=text name=username> Username
+			<br>
+			<input type=text name=password> Password
+			<br><br>
+			<input type=submit value="Login">
+			</form>
+		</div>
+		<div class=signup>
+			<h1>Sign Up</h1>
+			<form method=post action=signup>
+			<input type=text name=sUsername> Username
+			<br>
+			<input type=text name=email> E-mail
+			<br>
+			<input type=text name=sPassword> Password
+			<br><br>
+			<input type=submit value="Sign Up">
+			</form>
+		</div>
+	</div>
 </body>
 </html>

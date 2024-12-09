@@ -1,0 +1,61 @@
+@charset "UTF-8";
+body{
+	margin: 0;
+	padding: 0;
+	font-family: Noto Sans;
+	background: linear-gradient(to bottom right, #1F4529, #47663B, #E8ECD7, #EED3B1);
+	height: 100vh;
+	overflow: hidden;
+}
+.center
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 500px;
+	background: white;
+	border-radius: 10px;
+}
+.center h1{
+	text-align: center;
+	padding: 0 0 20px 0;
+	border-bottom: 1px solid silver;
+}
+
+.center form{
+	padding: 0 40px
+}
+
+.login{
+    width: 250px;
+    float: left;
+    height: 300px;
+    background: #E8ECD7;
+    
+    
+}
+.signup{
+    width: 250px;
+    float: right;
+    height: 300px;
+}
+
+input[type=text]{
+	background: none; 
+	border-radius: 15px;
+	
+}
+
+input[type=submit]{
+	width: 100%;
+	height: 25px;
+	border: 1px solid;
+	background: #4ae4ff;
+	border-radius: 15px; 
+	font-size: 15px;
+	color: white;
+}
+
+
+
