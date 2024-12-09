@@ -1,4 +1,5 @@
-<%@ page import="jdbc.AudioDAO, jdbc.Audio, jdbc.PlaylistDAO, jdbc.Playlist, jdbc.PlaylistContents, jdbc.PlaylistContentsDAO, java.util.ArrayList, java.util.List"%>
+<%@ page import="jdbc.PlaylistDAO, jdbc.Playlist, java.util.List"%>
+<%@ page import="jdbc.PlaylistContents, jdbc.PlaylistContentsDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,7 @@
 	<div class="tab">
 		<button class="tablinks" onclick="openTab(event, 'Search')">Search</button>
 		<button class="tablinks" onclick="openTab(event, 'Playlists')">Playlists</button>
+		<button class="tablinks" onclick="openTab(event, 'Create Playlist')">Create_Playlist</button>
 		<button class="tablinks" onclick="openTab(event, 'Artists')">Artists</button>
 		<button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
 	</div>
@@ -94,6 +96,9 @@
         }
     %>
 		
+	</div>
+	
+	<div id="Create_Playlists" class="tabcontent">
 	</div>
 
 	<div id="Artists" class="tabcontent">
