@@ -21,6 +21,16 @@ public class Audio {
     	
     	
     }
+    public Audio(String Title, int AuthorId, String Category, String Genre, String FilePath) {
+    	this.Title = Title;
+    	this.AuthorId = AuthorId;
+    	this.Category = Category;
+    	this.Genre = Genre;
+    	this.FilePath = FilePath;
+
+    	
+    	
+    }
     
     
 	public int getAudioID() {
