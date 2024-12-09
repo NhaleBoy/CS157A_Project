@@ -82,7 +82,20 @@ public class UserDAO extends Database{
                 return rs.getInt("UserID");  
             }
         }
-        return -1;  // Return -1 if no customer with username is found
+        return -1;  // Return -1 if no   username is found
+    }
+	
+	public String getUsernameViaUserId(int userId) throws SQLException {
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+            		 "SELECT Username FROM Users WHERE UserId = ?")) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Username");  
+            }
+        }
+        return null;  
     }
 	
 	

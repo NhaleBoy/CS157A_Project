@@ -31,7 +31,7 @@ public class Playlist {
 		this.audioCount = 0;
 		this.setPlaylistContents(playlistContents);
 		this.audioDAO = new AudioDAO();
-	}
+	}//ponentially delete
 	
 	public List<String> getPlaylistAudioNames() throws SQLException {
 		List<String> audioNames = new ArrayList<>();

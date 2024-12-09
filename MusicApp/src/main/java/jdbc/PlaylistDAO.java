@@ -167,7 +167,7 @@ public class PlaylistDAO extends Database{
     }
 
     // Retrieve playlist contents for a specific playlist
-    private List<PlaylistContents> getPlaylistContents(int playlistId) throws SQLException {
+    public List<PlaylistContents> getPlaylistContents(int playlistId) throws SQLException {
         List<PlaylistContents> playlistContents = new ArrayList<>();
         String query = "SELECT * FROM PlaylistContents WHERE PlaylistID = ?";
         try (Connection conn = getConnection();
