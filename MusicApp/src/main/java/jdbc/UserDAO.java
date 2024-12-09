@@ -43,12 +43,22 @@ public class UserDAO extends Database{
 	public void updateUser(User user) throws SQLException {
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(
-            		 "UPDATE Customers SET Username = ?, Password = ?, Email = ?, PrefGenre = ? WHERE UserID = ?")) {
+            		 "UPDATE Users SET Username = ?, Password = ?, Email = ?, PrefGenre = ? WHERE UserID = ?")) {
         	stmt.setString(1, user.getUsername());
 	        stmt.setString(2, user.getPassword());
 	        stmt.setString(3, user.getEmail());
 	        stmt.setString(4, user.getPrefGenre()); 
             stmt.setInt(5, user.getUserId());
+            stmt.executeUpdate();
+        }
+    }
+	
+	public void updateGenre(String genre,int userId) throws SQLException {
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+            		 "UPDATE Users SET PrefGenre = ? WHERE UserID = ?")) {
+	        stmt.setString(1, genre); 
+            stmt.setInt(2, userId);
             stmt.executeUpdate();
         }
     }

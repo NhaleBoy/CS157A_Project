@@ -1,5 +1,7 @@
+
 <%@ page import="jdbc.PlaylistDAO, jdbc.Playlist, java.util.List"%>
 <%@ page import="jdbc.PlaylistContents, jdbc.PlaylistContentsDAO"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,7 @@
 <body>
 	<%
 		if(session.getAttribute("username") == null){
-			//response.sendRedirect("index.jsp");
+			response.sendRedirect("index.jsp");
 		}
 	%>
 	<h2>MusicApp</h2>
@@ -56,45 +58,6 @@
 
 	<div id="Playlists" class="tabcontent">
 		<h3>Playlists</h3>
-		<%
-		PlaylistDAO playlistDAO = new PlaylistDAO();
-        PlaylistContentsDAO playlistContentsDAO = new PlaylistContentsDAO();
-        try {
-            List<Playlist> playlists = playlistDAO.getAllPlaylists();
-            if (playlists != null && !playlists.isEmpty()) {
-                for (Playlist playlist : playlists) {
-                    List<PlaylistContents> contents = playlist.getPlaylistContents();
-    %>
-                    <div class="playlist">
-                        <h2><%= playlist.getTitle() %></h2>
-                        <p><strong>Author ID:</strong> <%= playlist.getAuthorId() %></p>
-                        <p><strong>Contents:</strong></p>
-                        <ul>
-                            <% 
-                                List<String> audioNames = playlist.getPlaylistAudioNames();
-                                if (audioNames != null && !audioNames.isEmpty()) {
-                                    for (String audio : audioNames) {
-                            %>
-                                        <li><%= audio %></li>
-                            <% 
-                                    }
-                                } else { 
-                            %>
-                                <li>No audio files in this playlist.</li>
-                            <% } %>
-                        </ul>
-                    </div>
-    <%
-                }
-            } else {
-    %>
-                <p>No playlists available.</p>
-    <%
-            }
-        } catch (Exception e) {
-            out.println("<p>Error: " + e.getMessage() + "</p>");
-        }
-    %>
 		
 	</div>
 	

@@ -45,7 +45,15 @@ public class login extends HttpServlet {
 			if(dao.checkLogin(username, password)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("username", username);
-				RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
+				int id = dao.getUserIdViaUsername(username);
+				session.setAttribute("userId", id);
+				response.sendRedirect("homepage.jsp");
+			}
+			else
+			{
+				String message = "Invalid login.";
+				request.setAttribute("message", message);
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 				rd.forward(request, response);
 			}
 		}
