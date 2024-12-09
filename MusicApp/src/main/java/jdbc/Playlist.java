@@ -9,7 +9,7 @@ public class Playlist {
 	private int authorId;
 	private String title;
 	private List<PlaylistContents> playlistContents;
-	
+	private int audioCount;
 	private AudioDAO audioDAO;
 	
 	

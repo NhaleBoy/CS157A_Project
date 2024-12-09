@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-
+import jdbc.Audio;
+import jdbc.AudioDAO;
+import jdbc.UserDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Servlet implementation class Upload
@@ -17,7 +20,7 @@ import java.io.IOException;
 @WebServlet("/Upload")
 @MultipartConfig(
 		fileSizeThreshold = 1024 * 1024 * 1,
-		maxFileSize = 1024 * 1024 * 10,
+		maxFileSize = 1024 * 1024 * 100,
 		maxRequestSize = 1024 * 1024 * 100
 		)
 public class Upload extends HttpServlet {
@@ -41,6 +44,18 @@ public class Upload extends HttpServlet {
 		 if(fileExtension.equals("wav")){
 			 for(Part part: request.getParts()) {
 				 part.write("C:\\upload\\" + fileName);
+				 String genre = request.getParameter("genre");
+				 String category = request.getParameter("category");
+				 UserDAO udao = new UserDAO();
+				 try {
+					int id = udao.getUserIdViaUsername(request.getSession().getAttribute("username").toString());
+					AudioDAO dao = new AudioDAO();
+					dao.addAudio(new Audio(fileName, id, genre, category, "C:\\upload\\" + fileName ));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 
 				 
 				 
 				 String message = "File Uploaded.";
