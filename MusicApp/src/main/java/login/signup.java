@@ -47,7 +47,8 @@ public class signup extends HttpServlet {
 			String email = sanitize.sanitizeTrim(request.getParameter("email"));
 			// Begin validating username, password, and email
 			if(sanitize.isValidEmail(email)) {
-				//Store sign up information into database
+				//Check if username already exists
+				
 			}
 			else {
 				String message = "Invalid Email.";

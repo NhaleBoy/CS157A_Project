@@ -138,6 +138,17 @@ public class UserDAO extends Database{
             }
         }
     }
+	
+	public boolean doesEmailExist(String email) throws SQLException {
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+            		 "SELECT 1 FROM Users WHERE Email = ? LIMIT 1")) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();  // Returns true if a row is found
+            }
+        }
+    }
     
 
     public void deleteAllUserss() throws SQLException {
