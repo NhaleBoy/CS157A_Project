@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="webpage.css" type="text/css">
-<title>Insert title here</title>
+<title>Homepage</title>
 </head>
 <body>
 	<%
@@ -13,30 +13,61 @@
 	%>
 	<h2>MusicApp</h2>
 	<div class="tab">
-	  <button class="tablinks" onclick="openTab(event, 'Playlists')">Playlists</button>
-	  <button class="tablinks" onclick="openTab(event, 'Artists')">Artists</button>
-	  <button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
+		<button class="tablinks" onclick="openTab(event, 'Search')">Search</button>
+		<button class="tablinks" onclick="openTab(event, 'Playlists')">Playlists</button>
+		<button class="tablinks" onclick="openTab(event, 'Artists')">Artists</button>
+		<button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
 	</div>
 	
+	<div id="Search" class="tabcontent">
+		<h3>Search</h3>
+		<form method=post action=Search>
+			<input type="text" name=searchbox id=searchbox>
+			<br><br>
+			<label for="searchBy">Search by artist or song title:</label>
+		    <select name=searchBy, id=searchBy>
+		    	<option value="Artist">Artist</option>
+		    	<option value="Title">Title</option>
+		    </select>
+		    <br><br>
+		    <label for="mediaType">Media Type:</label>
+		    <select name=mediaType, id=mediaType>
+		    	<option value="Any">Any</option>
+		    	<option value="Song">Song</option>
+		    	<option value="Podcast">Podcast</option>
+		    </select>
+		    <br><br>
+			<input type=submit value="Confirm">
+		</form>
+	</div>
+
 	<div id="Playlists" class="tabcontent">
-	  <h3>Playlists</h3>
-	  <%
-	  	
-	  %>>
+		<h3>Playlists</h3>
 	</div>
-	
+
 	<div id="Artists" class="tabcontent">
-	  <h3>Artists</h3>
-	  <%
-	  	
-	  %>>
+		<h3>Artists</h3>
 	</div>
-	
+
 	<div id="Settings" class="tabcontent">
-	  <h3>Settings</h3>
-	  <%
-	  	
-	  %>>
+		<h3>Settings</h3>
+		<form method=post action=Settings>
+			<label for="genre">Choose preferred genre:</label>
+		    <select name=genre, id=genres>
+		    	<option value="n/a">N/A</option>
+		    	<option value="rock">Rock</option>
+		    	<option value="country">Country</option>
+		    </select>
+			<input type=submit value="Confirm">
+		</form>
+		<br><br>
+		<form method=post action=Settings>
+			<input type=submit name=creatorpage value="Creator Mode">
+		</form>
+		<br><br>
+		<form method=post action=Settings>
+			<input type=submit name=logout value="Logout">
+		</form>
 	</div>
 	
 	<script>

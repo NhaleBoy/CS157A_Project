@@ -34,7 +34,7 @@
 	        	String message = (String) request.getAttribute("message");
 	        if (message != null) {
 	    	%>
-	        <div><b><%= message %><b></div>
+	        <div><b><%= message %></b></div>
 	    	<%
 	        	}
 	    	%>

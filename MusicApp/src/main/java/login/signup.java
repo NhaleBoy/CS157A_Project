@@ -11,13 +11,6 @@ import jdbc.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.SecureRandom;
-import java.security.spec.KeySpec;
-import java.util.Base64;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-
 /**
  * Servlet implementation class signup
  */
