@@ -44,14 +44,14 @@ public class Upload extends HttpServlet {
 		 
 		if(fileExtension.equals("wav")){
 		for(Part part: request.getParts()) {
-			part.write("C:\\upload\\" + fileName);
+			part.write("C:\\Users\\Benny\\OneDrive\\Documents\\Repositories\\CS157A_Project\\MusicApp\\src\\main\\webapp\\upload\\" + fileName); //Copy paste the correct file path
 		}
 		String genre = request.getParameter("genre");
 		String category = request.getParameter("category");
 		try {
 			int id = (int) request.getSession().getAttribute("userId");
 			AudioDAO dao = new AudioDAO();
-			dao.addAudio(new Audio(fileName, id, category, genre, "C:\\upload\\" + fileName ));
+			dao.addAudio(new Audio(fileName, id, category, genre, "upload\\" + fileName ));
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

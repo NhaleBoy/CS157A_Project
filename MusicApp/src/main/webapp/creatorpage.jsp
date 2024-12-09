@@ -69,6 +69,18 @@
 
 	<div id="Podcasts" class="tabcontent">
 		<h3>Podcasts</h3>
+		<%
+			 List<Audio> podcasts = dao.getAudiosByAuthor(userId);
+			for(Audio audio: podcasts) {
+				String title = audio.getTitle();
+				String path = audio.getFilePath();
+		%>
+		<br>
+		<%= title%>: <audio controls><source src=<%=path%> type="audio/wav"></audio>
+		<br>
+		<%
+			}
+		%>
 	</div>
 
 	
