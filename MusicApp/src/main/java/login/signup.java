@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jdbc.UserDAO;
+import jdbc.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,7 +49,18 @@ public class signup extends HttpServlet {
 			// Begin validating username, password, and email
 			if(sanitize.isValidEmail(email)) {
 				//Check if username already exists
-				
+				if(dao.doesEmailExist(email) || dao.doesUsernameExist(username))
+				{
+					String message = "Please use other email or username.";
+					request.setAttribute("message", message);
+					RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+					rd.forward(request, response);
+				}
+				else {
+					//add information to database, UserID is auto increment and pref Genre is null
+					User user = new User(username, password, email);
+					dao.addUser(user);
+				}
 			}
 			else {
 				String message = "Invalid Email.";

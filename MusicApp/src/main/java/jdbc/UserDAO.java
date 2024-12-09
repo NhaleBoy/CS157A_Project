@@ -29,12 +29,11 @@ public class UserDAO extends Database{
 		// username is valid, create new user
 		try (Connection conn = getConnection();
 		         PreparedStatement stmt = conn.prepareStatement(
-		        		 "INSERT INTO Users (Username, Password, Email, PrefGenre) VALUES (?,?,?,?)")) {
+		        		 "INSERT INTO Users (Username, Password, Email) VALUES (?,?,?)")) {
 		        
 		        stmt.setString(1, user.getUsername());
 		        stmt.setString(2, user.getPassword());
 		        stmt.setString(3, user.getEmail());
-		        stmt.setString(4, user.getPrefGenre());
 		        stmt.executeUpdate();
 		    }
 	}

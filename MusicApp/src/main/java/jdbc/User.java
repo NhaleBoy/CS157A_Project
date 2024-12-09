@@ -15,6 +15,12 @@ public class User {
 		this.prefGenre = prefGenre;
 	}
 	
+	public User(String username, String password, String email) {
+		this.email = email;
+		this.username = username;
+		this.password = password;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
