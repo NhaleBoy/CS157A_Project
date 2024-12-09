@@ -46,9 +46,8 @@ public class Upload extends HttpServlet {
 				 part.write("C:\\upload\\" + fileName);
 				 String genre = request.getParameter("genre");
 				 String category = request.getParameter("category");
-				 UserDAO udao = new UserDAO();
 				 try {
-					int id = udao.getUserIdViaUsername(request.getSession().getAttribute("username").toString());
+					int id = (int) request.getSession().getAttribute("userId");
 					AudioDAO dao = new AudioDAO();
 					dao.addAudio(new Audio(fileName, id, genre, category, "C:\\upload\\" + fileName ));
 				} catch (SQLException e) {

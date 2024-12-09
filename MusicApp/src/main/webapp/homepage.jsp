@@ -19,7 +19,7 @@
 	<div class="tab">
 		<button class="tablinks" onclick="openTab(event, 'Search')">Search</button>
 		<button class="tablinks" onclick="openTab(event, 'Playlists')">Playlists</button>
-		<button class="tablinks" onclick="openTab(event, 'Create Playlist')">Create_Playlist</button>
+		<button class="tablinks" onclick="openTab(event, 'CreatePlaylist')">Create_Playlist</button>
 		<button class="tablinks" onclick="openTab(event, 'Artists')">Artists</button>
 		<button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
 	</div>
@@ -100,7 +100,7 @@
     %>
 	</div>
 	
-	<div id="Create_Playlists" class="tabcontent">
+	<div id="CreatePlaylist" class="tabcontent">
 	<h3>Create a New Playlist</h3>
         <form method="post" action="homepage.jsp">
             <label for="title">Playlist Title:</label>
