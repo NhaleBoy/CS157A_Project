@@ -40,28 +40,27 @@ public class Upload extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Part filePart = request.getPart("file");
 		String fileName = filePart.getSubmittedFileName();
-		 String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
-		 if(fileExtension.equals("wav")){
-			 for(Part part: request.getParts()) {
-				 part.write("C:\\upload\\" + fileName);
-				 String genre = request.getParameter("genre");
-				 String category = request.getParameter("category");
-				 try {
-					int id = (int) request.getSession().getAttribute("userId");
-					AudioDAO dao = new AudioDAO();
-					dao.addAudio(new Audio(fileName, id, genre, category, "upload\\" + fileName ));
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				 
-				 
-				 
-				 String message = "File Uploaded.";
-				 request.setAttribute("message", message);
-				 RequestDispatcher rd = request.getRequestDispatcher("creatorpage.jsp");
-				 rd.forward(request, response);
-			 }
+		String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
+		 
+		if(fileExtension.equals("wav")){
+		for(Part part: request.getParts()) {
+			part.write("C:\\upload\\" + fileName);
+		}
+		String genre = request.getParameter("genre");
+		String category = request.getParameter("category");
+		try {
+			int id = (int) request.getSession().getAttribute("userId");
+			AudioDAO dao = new AudioDAO();
+			dao.addAudio(new Audio(fileName, id, category, genre, "C:\\upload\\" + fileName ));
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			 String message = "File Uploaded.";
+			 request.setAttribute("message", message);
+			 RequestDispatcher rd = request.getRequestDispatcher("creatorpage.jsp");
+			 rd.forward(request, response);
 		 }
 		 else {
 			 String message = "Invalid file.";

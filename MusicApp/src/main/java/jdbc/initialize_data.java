@@ -27,20 +27,20 @@ public class initialize_data{
 		
 		List<Audio> audio = new ArrayList<>();
 		audio.add(new Audio(1, "british-soldiers-monologue", 3, "Podcast", "Monologue", "C:\\upload\\british-soldiers-monologue.wav"));
-		audio.add(new Audio(2, "funny-country-loop", 1, "Song", "Country", "upload\funny-country-loop.wav"));
-		audio.add(new Audio(3, "baby_crying", 12, "Podcast", "Acting", "upload\\baby_crying.wav"));
-		audio.add(new Audio(4, "baby_cry", 12, "Podcast", "Monologue", "upload\\baby_cry.wav"));
-		audio.add(new Audio(5, "yama-rock1", 10, "Song", "Rock", "upload\\yama-rock1.wav"));
-		audio.add(new Audio(6, "rock_guitar1", 10, "Song", "Rock", "upload\\rock_guitar1.wav"));
-		audio.add(new Audio(7, "funny-country-loop", 9, "Song", "Country", "upload\\funny-country-loop.wav"));
-		audio.add(new Audio(8, "construction", 11, "Song", "Metal", "upload\\construction.wav"));
-		audio.add(new Audio(9, "chime_big_ben", 9, "Song", "UK Garage", "upload\\chime_big_ben.wav"));
-		audio.add(new Audio(10, "cheer_long", 10, "Song", "K-Pop", "upload\\cheer_long.wav"));
-		audio.add(new Audio(11, "chainsaw", 10, "Song", "Rap", "upload\\chainsaw.wav"));
-		audio.add(new Audio(12, "ahem_x", 13, "Podcast", "Monologue", "upload\\ahem_x.wav"));
-		audio.add(new Audio(13, "cash_register2", 10, "Song", "Rap", "upload\\cash_register2.wav"));
-		audio.add(new Audio(14, "car_crash", 14, "Podcast", "True Crime", "upload\\car_crash.wav"));
-		audio.add(new Audio(15, "car_crash2", 14, "Song", "True Crime", "upload\\car_crash2.wav"));
+		audio.add(new Audio(2, "funny-country-loop", 1, "Song", "Country", "C:\\upload\funny-country-loop.wav"));
+		audio.add(new Audio(3, "baby_crying", 12, "Podcast", "Acting", "C:\\upload\\baby_crying.wav"));
+		audio.add(new Audio(4, "baby_cry", 12, "Podcast", "Monologue", "C:\\upload\\baby_cry.wav"));
+		audio.add(new Audio(5, "yama-rock1", 10, "Song", "Rock", "C:\\upload\\yama-rock1.wav"));
+		audio.add(new Audio(6, "rock_guitar1", 10, "Song", "Rock", "C:\\upload\\rock_guitar1.wav"));
+		audio.add(new Audio(7, "funny-country-loop", 9, "Song", "Country", "C:\\upload\\funny-country-loop.wav"));
+		audio.add(new Audio(8, "construction", 11, "Song", "Metal", "C:\\upload\\construction.wav"));
+		audio.add(new Audio(9, "chime_big_ben", 9, "Song", "UK Garage", "C:\\upload\\chime_big_ben.wav"));
+		audio.add(new Audio(10, "cheer_long", 10, "Song", "K-Pop", "C:\\upload\\cheer_long.wav"));
+		audio.add(new Audio(11, "chainsaw", 10, "Song", "Rap", "C:\\upload\\chainsaw.wav"));
+		audio.add(new Audio(12, "ahem_x", 13, "Podcast", "Monologue", "C:\\upload\\ahem_x.wav"));
+		audio.add(new Audio(13, "cash_register2", 10, "Song", "Rap", "C:\\upload\\cash_register2.wav"));
+		audio.add(new Audio(14, "car_crash", 14, "Podcast", "True Crime", "C:\\upload\\car_crash.wav"));
+		audio.add(new Audio(15, "car_crash2", 14, "Song", "True Crime", "C:\\upload\\car_crash2.wav"));
 		
 		List<User> user = new ArrayList<>();
 		user.add(new User(1, "user1", "pass1", "email1@gmail.com", "Rock"));
