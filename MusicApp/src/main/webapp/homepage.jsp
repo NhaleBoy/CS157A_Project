@@ -1,10 +1,14 @@
 
-<%@ page import="jdbc.PlaylistDAO, jdbc.Playlist, java.util.List"%>
-<%@ page import="jdbc.PlaylistContents, jdbc.PlaylistContentsDAO"%>
+<%@ page import="jdbc.*, java.util.List, java.util.Arrays"%>
 
 <!DOCTYPE html>
 <html>
 <head>
+<style>.playlists-container{
+	max-height: 500px; /* Set max height for the container */
+    overflow-y: auto;
+	}
+</style>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="webpage.css" type="text/css">
 <title>Homepage</title>
@@ -62,6 +66,8 @@
         // Display all playlists
         PlaylistDAO playlistDAO = new PlaylistDAO();
         PlaylistContentsDAO playlistContentsDAO = new PlaylistContentsDAO();
+        UserDAO userDAO = new UserDAO();
+        AudioDAO audioDAO = new AudioDAO();
         try {
             List<Playlist> playlists = playlistDAO.getAllPlaylists();
             if (playlists != null && !playlists.isEmpty()) {
@@ -70,15 +76,17 @@
     %>
                     <div class="playlist">
                         <h2><%= playlist.getTitle() %></h2>
-                        <p><strong>Author ID:</strong> <%= playlist.getAuthorId() %></p>
+                        <p><strong>Author Username:</strong> <%= userDAO.getUsernameViaUserId(playlist.getAuthorId())%></p>
                         <p><strong>Contents:</strong></p>
                         <ul>
                             <% 
-                                List<String> audioNames = playlist.getPlaylistAudioNames();
+                                List<PlaylistContents> audioNames = playlistDAO.getPlaylistContents(playlist.getPlaylistId());
                                 if (audioNames != null && !audioNames.isEmpty()) {
-                                    for (String audio : audioNames) {
+                                    for (PlaylistContents playlistContent : audioNames) {
+                                    	String audioname = audioDAO.getAudioById(playlistContent.getAudioId()).getTitle();
+                                    	
                             %>
-                                        <li><%= audio %></li>
+                                        <li><%= audioname %></li>
                             <% 
                                     }
                                 } else { 
@@ -114,18 +122,35 @@
         <%
             // Handle playlist creation
             if (request.getMethod().equalsIgnoreCase("POST")) {
-                String title = request.getParameter("title");
-                String authorIdStr = request.getParameter("authorId");
-                if (title != null && !title.isEmpty() && authorIdStr != null && !authorIdStr.isEmpty()) {
+                String title = request.getParameter("Playlist Title");
+                String dirtyContents = request.getParameter("Comma Separated List of Audio Titles");
+                if (title != null && !title.isEmpty()) {
                     try {
-                        int authorId = Integer.parseInt(authorIdStr);
-                        PlaylistDAO playlist1DAO = new PlaylistDAO();
+                    	PlaylistDAO playlist1DAO = new PlaylistDAO();
+                        PlaylistContentsDAO playlist1ContentsDAO = new PlaylistContentsDAO();
+                        AudioDAO ADAO = new AudioDAO();
+                        int authorId =  (int) request.getSession().getAttribute("userId");
+                        //make sure to handle exceptions and empty playlist content
                         Playlist newPlaylist = new Playlist(0, authorId, title); // Playlist ID will be auto-generated
                         int generatedId = playlist1DAO.addPlaylist(newPlaylist);
                         if (generatedId > 0) {
                             out.println("<p style='color: green;'>Playlist created successfully!</p>");
                         } else {
                             out.println("<p style='color: red;'>Failed to create playlist.</p>");
+                        }
+                        
+                        
+                        //separate dirtycontents into list of audio names
+                        if(dirtyContents != null && !dirtyContents.isEmpty()){
+                        	List<String> songTitles = Arrays.asList(dirtyContents.split("\\s*,\\s*"));
+                        	for(String songtitle: songTitles){
+                        		int audioid = ADAO.getAudioIdByTitle(songtitle);
+                        		if(audioid == -1){
+                        			throw new Exception("not a valid song title");
+                        		}
+                        		PlaylistContents songti = new PlaylistContents(0,newPlaylist.getPlaylistId(),audioid);
+                        		playlist1ContentsDAO.addPlaylistContents(songti);
+                        	}
                         }
                     } catch (Exception e) {
                         out.println("<p style='color: red;'>Error: " + e.getMessage() + "</p>");
