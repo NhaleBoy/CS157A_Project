@@ -1,3 +1,4 @@
+<%@ page import="jdbc.AudioDAO, jdbc.Audio, jdbc.PlaylistDAO, jdbc.Playlist, jdbc.PlaylistContents, jdbc.PlaylistContentsDAO, java.util.ArrayList, java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,6 +54,46 @@
 
 	<div id="Playlists" class="tabcontent">
 		<h3>Playlists</h3>
+		<%
+		PlaylistDAO playlistDAO = new PlaylistDAO();
+        PlaylistContentsDAO playlistContentsDAO = new PlaylistContentsDAO();
+        try {
+            List<Playlist> playlists = playlistDAO.getAllPlaylists();
+            if (playlists != null && !playlists.isEmpty()) {
+                for (Playlist playlist : playlists) {
+                    List<PlaylistContents> contents = playlist.getPlaylistContents();
+    %>
+                    <div class="playlist">
+                        <h2><%= playlist.getTitle() %></h2>
+                        <p><strong>Author ID:</strong> <%= playlist.getAuthorId() %></p>
+                        <p><strong>Contents:</strong></p>
+                        <ul>
+                            <% 
+                                List<String> audioNames = playlist.getPlaylistAudioNames();
+                                if (audioNames != null && !audioNames.isEmpty()) {
+                                    for (String audio : audioNames) {
+                            %>
+                                        <li><%= audio %></li>
+                            <% 
+                                    }
+                                } else { 
+                            %>
+                                <li>No audio files in this playlist.</li>
+                            <% } %>
+                        </ul>
+                    </div>
+    <%
+                }
+            } else {
+    %>
+                <p>No playlists available.</p>
+    <%
+            }
+        } catch (Exception e) {
+            out.println("<p>Error: " + e.getMessage() + "</p>");
+        }
+    %>
+		
 	</div>
 
 	<div id="Artists" class="tabcontent">
