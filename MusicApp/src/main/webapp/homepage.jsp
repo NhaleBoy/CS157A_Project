@@ -30,6 +30,16 @@
 		    	<option value="Title">Title</option>
 		    </select>
 		    <br><br>
+			<label for="genreSearch">Search by artist or song title:</label>
+		    <select name=genreSearch, id=genreSearch>
+		    	<option value="n/a">N/A</option>
+		    	<option value="Rock">Rock</option>
+		    	<option value="Country">Country</option>
+		    	<option value="Metal">Metal</option>
+		    	<option value="K-pop">K-pop</option>
+		    	<option value="Rap">Rap</option>
+		    </select>
+		    <br><br>
 		    <label for="mediaType">Media Type:</label>
 		    <select name=mediaType, id=mediaType>
 		    	<option value="Any">Any</option>
@@ -52,11 +62,14 @@
 	<div id="Settings" class="tabcontent">
 		<h3>Settings</h3>
 		<form method=post action=Settings>
-			<label for="genre">Choose preferred genre:</label>
-		    <select name=genre, id=genres>
+			<label for="genres">Choose preferred genre:</label>
+		    <select name=genres, id=genres>
 		    	<option value="n/a">N/A</option>
-		    	<option value="rock">Rock</option>
-		    	<option value="country">Country</option>
+		    	<option value="Rock">Rock</option>
+		    	<option value="Country">Country</option>
+		    	<option value="Metal">Metal</option>
+		    	<option value="K-pop">K-pop</option>
+		    	<option value="Rap">Rap</option>
 		    </select>
 			<input type=submit value="Confirm">
 		</form>

@@ -67,6 +67,27 @@ public class AudioDAO extends Database{
             }
             return null;
         }
+        
+        public List<Audio> getAudiosByAuthor(int authorId) throws SQLException {
+        	List<Audio> audios = new ArrayList<>();
+            try (Connection conn = getConnection();
+                 PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Audios WHERE AuthorId = ?")) {
+                stmt.setInt(1, authorId);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    audios.add(new Audio(
+                            rs.getInt("AudioID"),
+                            rs.getString("Title"),
+                            rs.getInt("AuthorId"),
+                            rs.getString("Category"),
+                            rs.getString("Genre"),
+                            rs.getString("FilePath")
+                            
+                    ));
+                }
+            }
+            return audios;
+        }
 
         // Get all Audios
         public List<Audio> getAllAudios() throws SQLException {

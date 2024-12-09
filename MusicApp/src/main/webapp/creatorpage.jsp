@@ -1,3 +1,4 @@
+<%@ page import="jdbc.AudioDAO, jdbc.Audio, java.util.ArrayList, java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +51,21 @@
 
 	<div id="Songs" class="tabcontent">
 		<h3>Songs</h3>
+		<%
+			int userId = (int) request.getSession().getAttribute("userId");
+			AudioDAO dao = new AudioDAO();
+			 List<Audio> audios = dao.getAudiosByAuthor(userId);
+			for(Audio audio: audios) {
+				String path = audio.getFilePath();
+		%>
+		<br>
+		<audio controls>
+			<source src=<%=path%> type="audio/wav">
+		</audio>
+		<br>
+		<%
+			}
+		%>
 	</div>
 
 	<div id="Podcasts" class="tabcontent">

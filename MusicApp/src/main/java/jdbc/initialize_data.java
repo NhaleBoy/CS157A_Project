@@ -1,20 +1,22 @@
 package jdbc;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import jdbc.AudioDAO;
-import jdbc.User;
-import jdbc.PlaylistContentsDAO;
-import jdbc.PlaylistDAO;
-
 public class initialize_data{
 	public static void main(String[] args) throws SQLException {
+		Database dao = new Database();
+		Connection conn = dao.getConnection();
 		AudioDAO audioDAO = new AudioDAO();
 		PlaylistDAO playlistDAO = new PlaylistDAO();
 		PlaylistContentsDAO playlistContentDAO = new PlaylistContentsDAO();
 		UserDAO userDAO = new UserDAO();
+		
+		Statement stmt = conn.createStatement();
+		stmt.execute("SET FOREIGN_KEY_CHECKS = 0;");
 	
 		audioDAO.deleteAllAudios();
 		playlistDAO.deleteAllPlaylists();
@@ -24,21 +26,21 @@ public class initialize_data{
 		System.out.println("Database emptied.");
 		
 		List<Audio> audio = new ArrayList<>();
-		audio.add(new Audio(1, "british-soldiers-monologue", 3, "Podcast", "Monologue", "audios/british-soldiers-monologue.wav"));
-		audio.add(new Audio(2, "funny-country-loop", 1, "Song", "Country", "audios/funny-country-loop.wav"));
-		audio.add(new Audio(3, "baby_crying", 12, "Podcast", "Acting", "baby_crying.wav"));
-		audio.add(new Audio(4, "baby_cry", 12, "Podcast", "Monologue", "baby_cry.wav"));
-		audio.add(new Audio(5, "yama-rock1", 10, "Song", "Rock", "yama-rock1.wav"));
-		audio.add(new Audio(6, "rock_guitar1", 10, "Song", "Rock", "rock_guitar1.wav"));
-		audio.add(new Audio(7, "funny-country-loop", 9, "Song", "Country", "funny-country-loop.wav"));
-		audio.add(new Audio(8, "construction", 11, "Song", "Metal", "construction.wav"));
-		audio.add(new Audio(9, "chime_big_ben", 9, "Song", "UK Garage", "chime_big_ben.wav"));
-		audio.add(new Audio(10, "cheer_long", 10, "Song", "K-Pop", "cheer_long.wav"));
-		audio.add(new Audio(11, "chainsaw", 10, "Song", "Rap", "chainsaw.wav"));
-		audio.add(new Audio(12, "ahem_x", 13, "Podcast", "Monologue", "ahem_x.wav"));
-		audio.add(new Audio(13, "cash_register2", 10, "Song", "Rap", "cash_register2.wav"));
-		audio.add(new Audio(14, "car_crash", 14, "Podcast", "True Crime", "car_crash.wav"));
-		audio.add(new Audio(15, "car_crash2", 14, "Song", "True Crime", "car_crash2.wav"));
+		audio.add(new Audio(1, "british-soldiers-monologue", 3, "Podcast", "Monologue", "C:\\upload\\british-soldiers-monologue.wav"));
+		audio.add(new Audio(2, "funny-country-loop", 1, "Song", "Country", "C:\\upload\\funny-country-loop.wav"));
+		audio.add(new Audio(3, "baby_crying", 12, "Podcast", "Acting", "C:\\upload\\baby_crying.wav"));
+		audio.add(new Audio(4, "baby_cry", 12, "Podcast", "Monologue", "C:\\upload\\baby_cry.wav"));
+		audio.add(new Audio(5, "yama-rock1", 10, "Song", "Rock", "C:\\upload\\yama-rock1.wav"));
+		audio.add(new Audio(6, "rock_guitar1", 10, "Song", "Rock", "C:\\upload\\rock_guitar1.wav"));
+		audio.add(new Audio(7, "funny-country-loop", 9, "Song", "Country", "C:\\upload\\funny-country-loop.wav"));
+		audio.add(new Audio(8, "construction", 11, "Song", "Metal", "C:\\upload\\construction.wav"));
+		audio.add(new Audio(9, "chime_big_ben", 9, "Song", "UK Garage", "C:\\upload\\chime_big_ben.wav"));
+		audio.add(new Audio(10, "cheer_long", 10, "Song", "K-Pop", "C:\\upload\\cheer_long.wav"));
+		audio.add(new Audio(11, "chainsaw", 10, "Song", "Rap", "C:\\upload\\chainsaw.wav"));
+		audio.add(new Audio(12, "ahem_x", 13, "Podcast", "Monologue", "C:\\upload\\ahem_x.wav"));
+		audio.add(new Audio(13, "cash_register2", 10, "Song", "Rap", "C:\\upload\\cash_register2.wav"));
+		audio.add(new Audio(14, "car_crash", 14, "Podcast", "True Crime", "C:\\upload\\car_crash.wav"));
+		audio.add(new Audio(15, "car_crash2", 14, "Song", "True Crime", "C:\\upload\\car_crash2.wav"));
 		
 		List<User> user = new ArrayList<>();
 		user.add(new User(1, "user1", "pass1", "email1@gmail.com", "Rock"));
@@ -72,7 +74,7 @@ public class initialize_data{
 		playlist.add(new Playlist(12,12,"playlist swag"));
 		playlist.add(new Playlist(13,13,"I love k-pop"));
 		playlist.add(new Playlist(14,14,"empty playlist"));
-		playlist.add(new Playlist(15,115,"superlist"));
+		playlist.add(new Playlist(15,15,"superlist"));
 		
 		List<PlaylistContents> playlistContents = new ArrayList<>();
 		playlistContents.add(new PlaylistContents(1,1,1));
@@ -115,6 +117,24 @@ public class initialize_data{
 		playlistContents.add(new PlaylistContents(38,15,12));
 		playlistContents.add(new PlaylistContents(39,15,3));
 		playlistContents.add(new PlaylistContents(40,15,11));
+		
+		for(User u: user)
+		{
+			userDAO.addUser(u);
+		}
+		for(Audio a: audio)
+		{
+			audioDAO.addAudio(a);
+		}
+		for(Playlist p: playlist){
+			playlistDAO.addPlaylist(p);
+		}
+		for(PlaylistContents pc: playlistContents)
+		{
+			playlistContentDAO.addPlaylistContents(pc);
+		}
+		stmt.execute("SET FOREIGN_KEY_CHECKS = 1;");
+		System.out.println("Database filled.");
 
 		
 	}

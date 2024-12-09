@@ -27,25 +27,25 @@ public static void main(String[] args) {
                 "PlaylistId INT AUTO_INCREMENT PRIMARY KEY, " +
                 "AuthorId INT NOT NULL, " +
                 "Title VARCHAR(100) NOT NULL, " +
-                "FOREIGN KEY (AuthorId) REFERENCES Users(UserId), " +
+                "FOREIGN KEY (AuthorId) REFERENCES Users(UserId) " +
                 ");";
 
         String createTablesSQL3 = "CREATE TABLE IF NOT EXISTS Audios (" +
                 "AudioId INT AUTO_INCREMENT PRIMARY KEY, " +
                 "Title VARCHAR(100) NOT NULL, " +
-                "Genre VARCHAR(50) NOT NULL" +
-                "Category VARCHAR(50) NOT NULL" +
+                "Genre VARCHAR(50) NOT NULL," +
+                "Category VARCHAR(50) NOT NULL," +
                 "FilePath VARCHAR(100) NOT NULL, " +
                 "AuthorId INT NOT NULL, " +
-                "FOREIGN KEY (AuthorId) REFERENCES Users(UserId), " +
+                "FOREIGN KEY (AuthorId) REFERENCES Users(UserId) " +
                 ");";
 
         String createTablesSQL4 = "CREATE TABLE IF NOT EXISTS PlaylistContents (" +
                 "PlaylistContentsId INT AUTO_INCREMENT PRIMARY KEY, " +
                 "PlaylistId INT NOT NULL, " +
                 "AudioId INT NOT NULL, " +
-                "FOREIGN KEY (PlaylistId) REFERENCES Playlist(PlaylistId), " +
-                "FOREIGN KEY (AudioId) REFERENCES Audio(AudioId)" +
+                "FOREIGN KEY (PlaylistId) REFERENCES Playlists(PlaylistId), " +
+                "FOREIGN KEY (AudioId) REFERENCES Audios(AudioId)" +
                 ");";
 
         // Create connection to the database
@@ -59,11 +59,12 @@ public static void main(String[] args) {
 
                 // Create a Statement to execute SQL queries
                 try (Statement stmt = conn.createStatement()) {
-                	
+                	stmt.execute("SET FOREIGN_KEY_CHECKS = 0;");
                 	stmt.executeUpdate(dropTablesSQL1);
                     stmt.executeUpdate(dropTablesSQL2);
                     stmt.executeUpdate(dropTablesSQL3);
                     stmt.executeUpdate(dropTablesSQL4);
+                    stmt.execute("SET FOREIGN_KEY_CHECKS = 1;");
 
                     System.out.println("Old tables deleted (if they existed).");
                 	
