@@ -16,10 +16,11 @@ CREATE TABLE IF NOT EXISTS Playlists (
 CREATE TABLE IF NOT EXISTS Audios ( 
                 AudioId INT AUTO_INCREMENT PRIMARY KEY,  
                 Title VARCHAR(100) NOT NULL,  
-                Genre VARCHAR(50) NOT NULL 
-                Category VARCHAR(50) NOT NULL 
+                Genre VARCHAR(50) NOT NULL ,
+                Category VARCHAR(50) NOT NULL ,
+                FilePath VARCHAR(100) NOT NULL,
                 AuthorId INT NOT NULL,  
-                FOREIGN KEY (AuthorId) REFERENCES Users(UserId)  +
+                FOREIGN KEY (AuthorId) REFERENCES Users(UserId)  
                 );
 
 CREATE TABLE IF NOT EXISTS PlaylistContents ( 

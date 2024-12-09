@@ -8,7 +8,6 @@ public class Playlist {
 	private int playlistId;
 	private int authorId;
 	private String title;
-	private int audioCount;
 	private List<PlaylistContents> playlistContents;
 	
 	private AudioDAO audioDAO;
@@ -57,12 +56,8 @@ public class Playlist {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getAudioCount() {
-		return audioCount;
-	}
-	public void setAudioCount(int audioCount) {
-		this.audioCount = audioCount;
-	}
+
+
 
 	public int getPlaylistId() {
 		return playlistId;

@@ -35,6 +35,7 @@ public static void main(String[] args) {
                 "Title VARCHAR(100) NOT NULL, " +
                 "Genre VARCHAR(50) NOT NULL" +
                 "Category VARCHAR(50) NOT NULL" +
+                "FilePath VARCHAR(100) NOT NULL, " +
                 "AuthorId INT NOT NULL, " +
                 "FOREIGN KEY (AuthorId) REFERENCES Users(UserId), " +
                 ");";
