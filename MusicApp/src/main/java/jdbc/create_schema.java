@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class schema extends Database {
+public class create_schema extends Database {
 public static void main(String[] args) {
     	
         String dropTablesSQL1 = "DROP TABLE IF EXISTS Users;";

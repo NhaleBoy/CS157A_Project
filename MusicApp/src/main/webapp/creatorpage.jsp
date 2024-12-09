@@ -13,10 +13,6 @@
 	%>
 	<h2>MusicApp</h2>
 	<div class="tab">
-		<form action="" method="post" enctype="multipart/form-data">
-		<input type="file" name="audioFile"/>
-		<input type="submit" value="Upload Audio" name="save_audio"/>
-		</form>
 		<button class="tablinks" onclick="openTab(event, 'Songs')">Songs</button>
 		<button class="tablinks" onclick="openTab(event, 'Upload')">Upload</button>
 		<button class="tablinks" onclick="openTab(event, 'Podcasts')">Podcasts</button>
