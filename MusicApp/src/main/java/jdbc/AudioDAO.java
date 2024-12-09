@@ -11,12 +11,12 @@ public class AudioDAO extends Database{
 	public void addAudio(Audio audio) throws SQLException {
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(
-            		 "INSERT INTO Audios (Title, AuthorId, Category, Genre, Length) VALUES (?, ?, ?, ?, ?)")) {
+            		 "INSERT INTO Audios (Title, AuthorId, Category, Genre, FilePath) VALUES (?, ?, ?, ?, ?)")) {
             stmt.setString(1, audio.getTitle());
             stmt.setInt(2, audio.getAuthorId());
             stmt.setString(3, audio.getCategory());
             stmt.setString(4, audio.getGenre());
-            stmt.setFloat(5, audio.getLength());
+            stmt.setString(5, audio.getFilePath());
             stmt.executeUpdate();
         }
         
@@ -31,7 +31,7 @@ public class AudioDAO extends Database{
                 stmt.setInt(2, audio.getAuthorId());
                 stmt.setString(3, audio.getCategory());
                 stmt.setString(4, audio.getGenre());
-                stmt.setFloat(5, audio.getLength());
+                stmt.setString(5, audio.getFilePath());
                 stmt.setInt(5, audio.getAudioID());
                 stmt.executeUpdate();
             }
@@ -60,7 +60,7 @@ public class AudioDAO extends Database{
                             rs.getInt("AuthorId"),
                             rs.getString("Category"),
                             rs.getString("Genre"),
-                            rs.getFloat("length")
+                            rs.getString("FilePath")
                             
                     );
                 }
@@ -81,7 +81,7 @@ public class AudioDAO extends Database{
                             rs.getInt("AuthorId"),
                             rs.getString("Category"),
                             rs.getString("Genre"),
-                            rs.getFloat("length")
+                            rs.getString("FilePath")
                     ));
                 }
             }
