@@ -20,7 +20,18 @@
 	
 	<div id="Upload" class="tabcontent">
 		<h3>Upload</h3>
-		
+		<form method=post action=Upload enctype="multipart/form-data">
+			<input type="file" name="file">
+			<input type=submit value="Upload">
+		</form>
+		<%
+			String message = (String) request.getAttribute("message");
+			if (message != null) {
+		%>
+		<div><b><%= message %></b></div>
+		<%
+			}
+		%>
 	</div>
 
 	<div id="Songs" class="tabcontent">
