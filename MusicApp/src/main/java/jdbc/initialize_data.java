@@ -27,7 +27,7 @@ public class initialize_data{
 		
 		List<Audio> audio = new ArrayList<>();
 		audio.add(new Audio(1, "british-soldiers-monologue", 3, "Podcast", "Monologue", "C:\\upload\\british-soldiers-monologue.wav"));
-		audio.add(new Audio(2, "funny-country-loop", 1, "Song", "Country", "C:\\upload\\funny-country-loop.wav"));
+		audio.add(new Audio(2, "funny-country-loop", 1, "Song", "Country", "C:\\upload\funny-country-loop.wav"));
 		audio.add(new Audio(3, "baby_crying", 12, "Podcast", "Acting", "C:\\upload\\baby_crying.wav"));
 		audio.add(new Audio(4, "baby_cry", 12, "Podcast", "Monologue", "C:\\upload\\baby_cry.wav"));
 		audio.add(new Audio(5, "yama-rock1", 10, "Song", "Rock", "C:\\upload\\yama-rock1.wav"));
