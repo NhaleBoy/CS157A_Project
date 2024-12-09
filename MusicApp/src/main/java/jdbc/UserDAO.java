@@ -150,7 +150,7 @@ public class UserDAO extends Database{
     }
     
 
-    public void deleteAllUserss() throws SQLException {
+    public void deleteAllUsers() throws SQLException {
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             int rowsAffected = stmt.executeUpdate("DELETE FROM Users");
