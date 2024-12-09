@@ -58,10 +58,83 @@
 
 	<div id="Playlists" class="tabcontent">
 		<h3>Playlists</h3>
-		
+		<%
+        // Display all playlists
+        PlaylistDAO playlistDAO = new PlaylistDAO();
+        PlaylistContentsDAO playlistContentsDAO = new PlaylistContentsDAO();
+        try {
+            List<Playlist> playlists = playlistDAO.getAllPlaylists();
+            if (playlists != null && !playlists.isEmpty()) {
+                for (Playlist playlist : playlists) {
+                    List<PlaylistContents> contents = playlist.getPlaylistContents();
+    %>
+                    <div class="playlist">
+                        <h2><%= playlist.getTitle() %></h2>
+                        <p><strong>Author ID:</strong> <%= playlist.getAuthorId() %></p>
+                        <p><strong>Contents:</strong></p>
+                        <ul>
+                            <% 
+                                List<String> audioNames = playlist.getPlaylistAudioNames();
+                                if (audioNames != null && !audioNames.isEmpty()) {
+                                    for (String audio : audioNames) {
+                            %>
+                                        <li><%= audio %></li>
+                            <% 
+                                    }
+                                } else { 
+                            %>
+                                <li>No audio files in this playlist.</li>
+                            <% } %>
+                        </ul>
+                    </div>
+    <%
+                }
+            } else {
+    %>
+                <p>No playlists available.</p>
+    <%
+            }
+        } catch (Exception e) {
+            out.println("<p>Error: " + e.getMessage() + "</p>");
+        }
+    %>
 	</div>
 	
 	<div id="Create_Playlists" class="tabcontent">
+	<h3>Create a New Playlist</h3>
+        <form method="post" action="homepage.jsp">
+            <label for="title">Playlist Title:</label>
+            <input type="text" id="title" name="title" required>
+            
+            <label for="authorId">Author ID:</label>
+            <input type="number" id="authorId" name="authorId" required>
+            
+            <button type="submit">Create Playlist</button>
+        </form>
+        <%
+            // Handle playlist creation
+            if (request.getMethod().equalsIgnoreCase("POST")) {
+                String title = request.getParameter("title");
+                String authorIdStr = request.getParameter("authorId");
+                if (title != null && !title.isEmpty() && authorIdStr != null && !authorIdStr.isEmpty()) {
+                    try {
+                        int authorId = Integer.parseInt(authorIdStr);
+                        PlaylistDAO playlist1DAO = new PlaylistDAO();
+                        Playlist newPlaylist = new Playlist(0, authorId, title); // Playlist ID will be auto-generated
+                        int generatedId = playlist1DAO.addPlaylist(newPlaylist);
+                        if (generatedId > 0) {
+                            out.println("<p style='color: green;'>Playlist created successfully!</p>");
+                        } else {
+                            out.println("<p style='color: red;'>Failed to create playlist.</p>");
+                        }
+                    } catch (Exception e) {
+                        out.println("<p style='color: red;'>Error: " + e.getMessage() + "</p>");
+                    }
+                } else {
+                    out.println("<p style='color: red;'>Please provide valid input.</p>");
+                }
+            }
+        %>
 	</div>
 
 	<div id="Artists" class="tabcontent">
