@@ -6,8 +6,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import jdbc.UserDAO;
 import login.sanitize;
 
 /**
@@ -26,14 +29,6 @@ public class login extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,18 +37,17 @@ public class login extends HttpServlet {
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
-			//Make prepared statements here
+			UserDAO dao = new UserDAO();
+			String username = sanitize.sanitizeTrim(request.getParameter("username"));
+			String password = sanitize.sanitizeTrim(request.getParameter("password"));
 			
 			
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
-			
-			// Begin validating username and password
-			
-			
-			request.setAttribute("username", username);
-			RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
-			rd.forward(request, response);
+			if(dao.checkLogin(username, password)) {
+				HttpSession session = request.getSession();
+				session.setAttribute("username", username);
+				RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
+				rd.forward(request, response);
+			}
 		}
 		catch(Exception e){
 			out.println("Error: " + e.getMessage());
