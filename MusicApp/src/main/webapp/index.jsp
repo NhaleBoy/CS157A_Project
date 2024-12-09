@@ -5,6 +5,11 @@
 <title>Please enter Login/Sign up</title>
 </head>
 <body>
+	<%
+		if(session.getAttribute("username") != null){
+			response.sendRedirect("homepage.jsp");
+		}
+	%>
 	<div class=center>
 		<div class=login>
 			<h1>Login</h1>

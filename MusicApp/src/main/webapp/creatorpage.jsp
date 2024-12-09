@@ -9,7 +9,7 @@
 <body>
 	<%
 		if(session.getAttribute("username") == null){
-			//response.sendRedirect("index.jsp");
+			response.sendRedirect("index.jsp");
 		}
 	%>
 	<h2>MusicApp</h2>
@@ -56,12 +56,11 @@
 			AudioDAO dao = new AudioDAO();
 			 List<Audio> audios = dao.getAudiosByAuthor(userId);
 			for(Audio audio: audios) {
+				String title = audio.getTitle();
 				String path = audio.getFilePath();
 		%>
 		<br>
-		<audio controls>
-			<source src=<%=path%> type="audio/wav">
-		</audio>
+		<%= title%>: <audio controls><source src=<%=path%> type="audio/wav"></audio>
 		<br>
 		<%
 			}

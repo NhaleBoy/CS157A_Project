@@ -8,7 +8,7 @@
 <body>
 	<%
 		if(session.getAttribute("username") == null){
-			//response.sendRedirect("index.jsp");
+			response.sendRedirect("index.jsp");
 		}
 	%>
 	<h2>MusicApp</h2>
@@ -53,6 +53,7 @@
 
 	<div id="Playlists" class="tabcontent">
 		<h3>Playlists</h3>
+		
 	</div>
 
 	<div id="Artists" class="tabcontent">
