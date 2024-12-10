@@ -123,9 +123,9 @@
 
 	<div id="Settings" class="tabcontent">
 		<h3>Settings</h3>
-		<form method=post action=Settings>
+		<form method="POST" action=Settings>
 			<label for="genres">Choose preferred genre:</label>
-		    <select name=genres, id=genres>
+		    <select name="genres" id="genres">
 		    	<option value="n/a">N/A</option>
 		    	<option value="Rock">Rock</option>
 		    	<option value="Country">Country</option>

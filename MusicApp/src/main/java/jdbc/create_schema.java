@@ -11,7 +11,7 @@ public static void main(String[] args) {
         String dropTablesSQL1 = "DROP TABLE IF EXISTS Users;";
         String dropTablesSQL2 = "DROP TABLE IF EXISTS Playlists;";
         String dropTablesSQL3 = "DROP TABLE IF EXISTS Audios;";
-        String dropTablesSQL4 = "DROP TABLE IF EXISTS PlaylistContains;";
+        String dropTablesSQL4 = "DROP TABLE IF EXISTS PlaylistContents;";
         
         // SQL queries to create tables
 

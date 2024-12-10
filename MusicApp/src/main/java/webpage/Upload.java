@@ -43,7 +43,7 @@ public class Upload extends HttpServlet {
 		 
 		if(fileExtension.equals("wav")){
 		for(Part part: request.getParts()) {
-			part.write("file:///C://Users//the_n//Desktop//sjsu//F24//CS157A//project//CS157A_Project//MusicApp//src//main//webapp//upload//" + fileName); //Copy paste the correct file path
+			part.write("C:\\Users\\Benny\\OneDrive\\Documents\\Repositories\\CS157A_Project\\MusicApp\\src\\main\\webapp\\upload\\" + fileName); //Copy paste the correct file path
 		}
 		String genre = request.getParameter("genre");
 		String category = request.getParameter("category");

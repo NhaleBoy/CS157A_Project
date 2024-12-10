@@ -45,7 +45,9 @@ public class Settings extends HttpServlet {
 		else{
 			UserDAO dao = new UserDAO();
 			int id = (int) session.getAttribute("userId");
+			System.out.println(id);
 			String genre = request.getParameter("genres");
+			System.out.println(genre);
 			try {
 				dao.updateGenre(genre, id);
 				response.sendRedirect("homepage.jsp");

@@ -24,20 +24,20 @@
 		<form method=post action=Upload enctype="multipart/form-data">
 			<input type="file" name="file">
 			<br>
-			MediaType: <input type="text" name=category>
-			<!-- <label for="mediaType">Select type:</label>
-			<select name=mediaType, id=mediaType>
+			<!-- MediaType: <input type="text" name=category> -->
+			 <label for="category">Select type:</label>
+			<select name="category" id="category">
 		    	<option value="Song">Song</option>
 		    	<option value="Podcast">Podcast</option>
-		    </select> -->
+		    </select> 
 			<br>
-			<!-- <label for="genre">Select genre:</label>
-		    <select name=genre, id=genres>
+			<label for="genre">Select genre:</label>
+		    <select name="genre" id="genre">
 		    	<option value="n/a">N/A</option>
 		    	<option value="rock">Rock</option>
 		    	<option value="country">Country</option>
-		    </select> -->
-		    Genre: <input type="text" name=genre>
+		    </select>
+		    <!-- Genre: <input type="text" name=genre> -->
 		    
 			<br>
 			<input type=submit value="Upload">
@@ -57,7 +57,7 @@
 		<%
 			int userId = (int) request.getSession().getAttribute("userId");
 			AudioDAO dao = new AudioDAO();
-			 List<Audio> audios = dao.getAudiosByAuthor(userId);
+			 List<Audio> audios = dao.getAudiosSongs(userId);
 			for(Audio audio: audios) {
 				String title = audio.getTitle();
 				String path = audio.getFilePath();
@@ -73,7 +73,7 @@
 	<div id="Podcasts" class="tabcontent">
 		<h3>Podcasts</h3>
 		<%
-			 List<Audio> podcasts = dao.getAudiosByAuthor(userId);
+			 List<Audio> podcasts = dao.getAudiosPods(userId);
 			for(Audio audio: podcasts) {
 				String title = audio.getTitle();
 				String path = audio.getFilePath();

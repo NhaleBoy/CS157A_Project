@@ -121,10 +121,55 @@ public class AudioDAO extends Database{
                return null;
         }
         
+   
+        
+        
         public List<Audio> getAudiosByAuthor(int authorId) throws SQLException {
         	List<Audio> audios = new ArrayList<>();
             try (Connection conn = getConnection();
                  PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Audios WHERE AuthorId = ?")) {
+                stmt.setInt(1, authorId);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    audios.add(new Audio(
+                            rs.getInt("AudioID"),
+                            rs.getString("Title"),
+                            rs.getInt("AuthorId"),
+                            rs.getString("Category"),
+                            rs.getString("Genre"),
+                            rs.getString("FilePath")
+                            
+                    ));
+                }
+            }
+            return audios;
+        }
+        
+        public List<Audio> getAudiosSongs(int authorId) throws SQLException {
+        	List<Audio> audios = new ArrayList<>();
+            try (Connection conn = getConnection();
+                 PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Audios WHERE AuthorId = ? AND Category ='Song'")) {
+                stmt.setInt(1, authorId);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    audios.add(new Audio(
+                            rs.getInt("AudioID"),
+                            rs.getString("Title"),
+                            rs.getInt("AuthorId"),
+                            rs.getString("Category"),
+                            rs.getString("Genre"),
+                            rs.getString("FilePath")
+                            
+                    ));
+                }
+            }
+            return audios;
+        }
+        
+        public List<Audio> getAudiosPods(int authorId) throws SQLException {
+        	List<Audio> audios = new ArrayList<>();
+            try (Connection conn = getConnection();
+                 PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Audios WHERE AuthorId = ? AND Category ='Podcast'")) {
                 stmt.setInt(1, authorId);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
