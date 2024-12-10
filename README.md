@@ -13,6 +13,8 @@ We have created a database interface that can handle creating an account, signin
 - in terminal run the following commands
   ``cd c:\xampp\mysql\bin``
 ``mysql.exe -u root --password`` and hit enter, then do ``create database musicapp\g`` and finally, ``use musicapp\g``
+- Run the create_schema.java file
+- Run the initialize_data.java file
 - Run Apache Tomcat 10.1 server
 - Then run index.jsp located in src/main/webapp
 
