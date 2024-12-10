@@ -49,7 +49,6 @@ public class Search extends HttpServlet {
 			}
 		}
 		else {
-			UserDAO udao = new UserDAO();
 			try {
 				Audio audio = dao.getAudioThatIsPod(searchbox);
 				request.setAttribute("search", audio);

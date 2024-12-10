@@ -103,7 +103,7 @@ public class AudioDAO extends Database{
         
         public Audio getAudioThatIsPod(String title)throws SQLException {
         	try (Connection conn = getConnection();
-                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Audios WHERE AudioId = ? AND Category ='Podcast' ")) {
+                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Audios WHERE Title = ? AND Category ='Podcast' ")) {
                    stmt.setString(1, title);
                    ResultSet rs = stmt.executeQuery();
                    if (rs.next()) {
