@@ -44,14 +44,7 @@ public class Settings extends HttpServlet {
 		}
 		else{
 			UserDAO dao = new UserDAO();
-			String username = (String) session.getAttribute("username");
-			int id = 0;
-			try {
-				id = dao.getUserIdViaUsername(username);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				System.out.println("dao get went wrong");
-			}
+			int id = (int) session.getAttribute("userId");
 			String genre = request.getParameter("genres");
 			try {
 				dao.updateGenre(genre, id);
