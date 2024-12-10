@@ -71,7 +71,7 @@ public class AudioDAO extends Database{
         public int getAudioIdByTitle(String title)throws SQLException {
         	try (Connection conn = getConnection();
                     PreparedStatement stmt = conn.prepareStatement(
-                   		 "SELECT AudioId FROM Audio WHERE Title = ?")) {
+                   		 "SELECT AudioId FROM Audios WHERE Title = ?")) {
                    stmt.setString(1, title);
                    ResultSet rs = stmt.executeQuery();
                    if (rs.next()) {

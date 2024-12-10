@@ -12,6 +12,11 @@ public class PlaylistContents {
 		this.audioId = audioId;
 	}
 	
+	public PlaylistContents( int playlistId, int audioId) {
+		this.playlistId =playlistId;
+		this.audioId = audioId;
+	}
+	
 	@Override
 	public String toString() {
 		return "PlaylistContents [playlistContentsId=" + playlistContentsId + ", playlistId="+playlistId+", AudioId="+audioId+"]";
