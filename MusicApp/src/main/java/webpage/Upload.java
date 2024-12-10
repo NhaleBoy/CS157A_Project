@@ -51,7 +51,8 @@ public class Upload extends HttpServlet {
 			int id = (int) request.getSession().getAttribute("userId");
 			AudioDAO dao = new AudioDAO();
 			String filePath = "upload\\" + fileName;
-			Audio audio = new Audio(fileName, id, category, genre, filePath);
+			String title = fileName.substring(0, fileName.length() - 4);
+			Audio audio = new Audio(title, id, category, genre, filePath);
 			dao.addAudio(audio);
 		}
 		catch (SQLException e) {

@@ -24,18 +24,21 @@
 		<form method=post action=Upload enctype="multipart/form-data">
 			<input type="file" name="file">
 			<br>
-			<label for="mediaType">Select type:</label>
+			MediaType: <input type="text" name=category>
+			<!-- <label for="mediaType">Select type:</label>
 			<select name=mediaType, id=mediaType>
 		    	<option value="Song">Song</option>
 		    	<option value="Podcast">Podcast</option>
-		    </select>
+		    </select> -->
 			<br>
-			<label for="genre">Select genre:</label>
+			<!-- <label for="genre">Select genre:</label>
 		    <select name=genre, id=genres>
 		    	<option value="n/a">N/A</option>
 		    	<option value="rock">Rock</option>
 		    	<option value="country">Country</option>
-		    </select>
+		    </select> -->
+		    Genre: <input type="text" name=genre>
+		    
 			<br>
 			<input type=submit value="Upload">
 		</form>
