@@ -36,8 +36,8 @@ public class signup extends HttpServlet {
 		try {
 			out = response.getWriter();
 			UserDAO dao = new UserDAO();
-			String username = sanitize.sanitizeTrim(request.getParameter("username"));
-			String password = sanitize.sanitizeTrim(request.getParameter("password"));
+			String username = sanitize.sanitizeTrim(request.getParameter("sUsername"));
+			String password = sanitize.sanitizeTrim(request.getParameter("sPassword"));
 			String email = sanitize.sanitizeTrim(request.getParameter("email"));
 			// Begin validating username, password, and email
 			if(sanitize.isValidEmail(email)) {

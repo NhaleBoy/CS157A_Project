@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import jdbc.Audio;
 import jdbc.AudioDAO;
-import jdbc.UserDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -51,7 +50,9 @@ public class Upload extends HttpServlet {
 		try {
 			int id = (int) request.getSession().getAttribute("userId");
 			AudioDAO dao = new AudioDAO();
-			dao.addAudio(new Audio(fileName, id, category, genre, "upload\\" + fileName ));
+			String filePath = "upload\\" + fileName;
+			Audio audio = new Audio(fileName, id, category, genre, filePath);
+			dao.addAudio(audio);
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

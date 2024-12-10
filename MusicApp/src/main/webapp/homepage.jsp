@@ -1,5 +1,5 @@
 
-<%@ page import="jdbc.*, java.util.List, java.util.Arrays"%>
+<%@ page import="jdbc.*, java.util.List, java.util.Arrays, jdbc.Audio"%>
 
 <!DOCTYPE html>
 <html>
@@ -24,30 +24,32 @@
 		<button class="tablinks" onclick="openTab(event, 'Search')">Search</button>
 		<button class="tablinks" onclick="openTab(event, 'Playlists')">Playlists</button>
 		<button class="tablinks" onclick="openTab(event, 'CreatePlaylist')">Create_Playlist</button>
-		<button class="tablinks" onclick="openTab(event, 'Artists')">Artists</button>
 		<button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
 	</div>
 	
 	<div id="Search" class="tabcontent">
 		<h3>Search</h3>
-		<form method=post action=Search>
+		<form method="POST" action=Search>
 			<input type="text" name=searchbox id=searchbox>
-			<br><br>
-			<label for="searchBy">Search by artist or song title:</label>
-		    <select name=searchBy, id=searchBy>
-		    	<option value="Artist">Artist</option>
-		    	<option value="Title">Title</option>
-		    </select>
 		    <br><br>
 		    <label for="mediaType">Media Type:</label>
-		    <select name=mediaType, id=mediaType>
-		    	<option value="Any">Any</option>
+		    <select name="mediaType", id="mediaType">
 		    	<option value="Song">Song</option>
 		    	<option value="Podcast">Podcast</option>
 		    </select>
 		    <br><br>
-			<input type=submit value="Confirm">
+			<input type="submit" value="Confirm">
 		</form>
+		<%
+			Audio audio = (Audio) request.getAttribute("search");
+			if (audio != null) {
+				String title = audio.getTitle();
+				String path = audio.getFilePath();
+	    	%>
+	        <%= title%>: <audio controls><source src=<%=path%> type="audio/wav"></audio>
+	    	<%
+	        	}
+	    	%>
 	</div>
 
 	<div id="Playlists" class="tabcontent">
@@ -99,61 +101,25 @@
 	
 	<div id="CreatePlaylist" class="tabcontent">
 	<h3>Create a New Playlist</h3>
-        <form method="post" action="homepage.jsp">
+        <form method="post" action=CreatePlaylist>
             <label for="title">Playlist Title:</label>
             <input type="text" id="title" name="title" required>
             
-            <label for="authorId">Author ID:</label>
-            <input type="number" id="authorId" name="authorId" required>
+            <label for="songTitles">Song Titles:</label>
+            <input type="text" id="songTitles" name="songTitle" required>
             
             <button type="submit">Create Playlist</button>
         </form>
         <%
-            // Handle playlist creation
-            if (request.getMethod().equalsIgnoreCase("POST")) {
-                String title = request.getParameter("Playlist Title");
-                String dirtyContents = request.getParameter("Comma Separated List of Audio Titles");
-                if (title != null && !title.isEmpty()) {
-                    try {
-                    	PlaylistDAO playlist1DAO = new PlaylistDAO();
-                        PlaylistContentsDAO playlist1ContentsDAO = new PlaylistContentsDAO();
-                        AudioDAO ADAO = new AudioDAO();
-                        int authorId =  (int) request.getSession().getAttribute("userId");
-                        //make sure to handle exceptions and empty playlist content
-                        Playlist newPlaylist = new Playlist(0, authorId, title); // Playlist ID will be auto-generated
-                        int generatedId = playlist1DAO.addPlaylist(newPlaylist);
-                        if (generatedId > 0) {
-                            out.println("<p style='color: green;'>Playlist created successfully!</p>");
-                        } else {
-                            out.println("<p style='color: red;'>Failed to create playlist.</p>");
-                        }
-                        
-                        
-                        //separate dirtycontents into list of audio names
-                        if(dirtyContents != null && !dirtyContents.isEmpty()){
-                        	List<String> songTitles = Arrays.asList(dirtyContents.split("\\s*,\\s*"));
-                        	for(String songtitle: songTitles){
-                        		int audioid = ADAO.getAudioIdByTitle(songtitle);
-                        		if(audioid == -1){
-                        			throw new Exception("not a valid song title");
-                        		}
-                        		PlaylistContents songti = new PlaylistContents(0,newPlaylist.getPlaylistId(),audioid);
-                        		playlist1ContentsDAO.addPlaylistContents(songti);
-                        	}
-                        }
-                    } catch (Exception e) {
-                        out.println("<p style='color: red;'>Error: " + e.getMessage() + "</p>");
-                    }
-                } else {
-                    out.println("<p style='color: red;'>Please provide valid input.</p>");
-                }
-            }
-        %>
+			String message = (String) request.getAttribute("message");
+			if (message != null) {
+		%>
+		<div><b><%= message %></b></div>
+		<%
+			}
+		%>
 	</div>
 
-	<div id="Artists" class="tabcontent">
-		<h3>Artists</h3>
-	</div>
 
 	<div id="Settings" class="tabcontent">
 		<h3>Settings</h3>

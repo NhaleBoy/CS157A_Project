@@ -14,20 +14,7 @@ public class UserDAO extends Database{
 	public void addUser (User user) throws SQLException {
 		// check if username already exists
 		try (Connection conn = getConnection();
-		         PreparedStatement checkStmt = conn.prepareStatement(
-		        		 "SELECT COUNT(*) FROM Users WHERE Username = ?")) {
-			
-			checkStmt.setString(1, user.getUsername());
-	        ResultSet rs = checkStmt.executeQuery();
-	        rs.next();
-	        int count = rs.getInt(1);
-	        
-	        if (count > 0) {
-	            throw new SQLException("A User with the Username: '" + user.getUsername() + "' already exists.");
-	        }
-		}
 		// username is valid, create new user
-		try (Connection conn = getConnection();
 		         PreparedStatement stmt = conn.prepareStatement(
 		        		 "INSERT INTO Users (Username, Password, Email) VALUES (?,?,?)")) {
 		        
@@ -56,7 +43,7 @@ public class UserDAO extends Database{
 	public void updateGenre(String genre,int userId) throws SQLException {
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(
-            		 "UPDATE Users SET PrefGenre = ? WHERE UserID = ?")) {
+            		 "UPDATE Users SET PrefGenre = ? WHERE UserId = ?")) {
 	        stmt.setString(1, genre); 
             stmt.setInt(2, userId);
             stmt.executeUpdate();

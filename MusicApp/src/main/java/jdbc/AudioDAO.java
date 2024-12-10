@@ -33,7 +33,7 @@ public class AudioDAO extends Database{
                 stmt.setString(4, audio.getGenre());
                 stmt.setString(5, audio.getFilePath());
                 stmt.setInt(5, audio.getAudioID());
-                stmt.executeUpdate();
+                stmt.execute();
             }
         }
         
@@ -43,7 +43,7 @@ public class AudioDAO extends Database{
                  PreparedStatement stmt = conn.prepareStatement(
                 		 "DELETE FROM Audios WHERE AudioId = ?")) {
                 stmt.setInt(1, audioId);
-                stmt.executeUpdate();
+                stmt.execute();
             }
         }
 
@@ -79,6 +79,46 @@ public class AudioDAO extends Database{
                    }
                }
         	return -1; // if not exist
+        }
+        
+        public Audio getAudioThatIsSong(String title)throws SQLException {
+        	try (Connection conn = getConnection();
+                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Audios WHERE Title = ? AND Category ='Song' ")) {
+                   stmt.setString(1, title);
+                   ResultSet rs = stmt.executeQuery();
+                   if (rs.next()) {
+                       return new Audio(
+                               rs.getInt("AudioID"),
+                               rs.getString("Title"),
+                               rs.getInt("AuthorId"),
+                               rs.getString("Category"),
+                               rs.getString("Genre"),
+                               rs.getString("FilePath")
+                               
+                       );
+                   }
+               }
+               return null;
+        }
+        
+        public Audio getAudioThatIsPod(String title)throws SQLException {
+        	try (Connection conn = getConnection();
+                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Audios WHERE AudioId = ? AND Category ='Podcast' ")) {
+                   stmt.setString(1, title);
+                   ResultSet rs = stmt.executeQuery();
+                   if (rs.next()) {
+                       return new Audio(
+                               rs.getInt("AudioID"),
+                               rs.getString("Title"),
+                               rs.getInt("AuthorId"),
+                               rs.getString("Category"),
+                               rs.getString("Genre"),
+                               rs.getString("FilePath")
+                               
+                       );
+                   }
+               }
+               return null;
         }
         
         public List<Audio> getAudiosByAuthor(int authorId) throws SQLException {

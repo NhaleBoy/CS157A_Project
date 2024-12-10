@@ -55,6 +55,8 @@ public class Settings extends HttpServlet {
 			String genre = request.getParameter("genres");
 			try {
 				dao.updateGenre(genre, id);
+				response.sendRedirect("homepage.jsp");
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				System.out.println("dao update went wrong");
