@@ -33,8 +33,8 @@ public static void main(String[] args) {
         String createTablesSQL3 = "CREATE TABLE IF NOT EXISTS Audios (" +
                 "AudioId INT AUTO_INCREMENT PRIMARY KEY, " +
                 "Title VARCHAR(100) NOT NULL, " +
-                "Genre VARCHAR(50) NOT NULL," +
-                "Category VARCHAR(50) NOT NULL," +
+                "Genre VARCHAR(50) NOT NULL DEFAULT 'Pop'," +
+                "Category VARCHAR(50) NOT NULL DEFAULT 'Song'," +
                 "FilePath VARCHAR(100) NOT NULL, " +
                 "AuthorId INT NOT NULL, " +
                 "FOREIGN KEY (AuthorId) REFERENCES Users(UserId) " +
