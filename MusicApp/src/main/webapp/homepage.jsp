@@ -69,22 +69,6 @@
                     <div class="playlist">
                         <h2><%= playlist.getTitle() %></h2>
                         <p><strong>Author Username:</strong> <%= userDAO.getUsernameViaUserId(playlist.getAuthorId())%></p>
-                        <p><strong>Contents:</strong></p>
-                        <ul>
-                            <% 
-                                if (contents != null && !contents.isEmpty()) {
-                                    for (PlaylistContents playlistContent : contents) {
-                                    	String audioname = audioDAO.getAudioById(playlistContent.getAudioId()).getTitle();
-                                    	
-                            %>
-                                        <li><%= audioname %></li>
-                            <% 
-                                    }
-                                } else { 
-                            %>
-                                <li>No audio files in this playlist.</li>
-                            <% } %>
-                        </ul>
                     </div>
     <%
                 }
