@@ -103,10 +103,10 @@
 	<h3>Create a New Playlist</h3>
         <form method="post" action=CreatePlaylist>
             <label for="title">Playlist Title:</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title">
             
-            <label for="songTitles">Song Titles:</label>
-            <input type="text" id="songTitles" name="songTitle" required>
+            <label for="songTitle">Song Titles:</label>
+            <input type="text" id="songTitle" name="songTitle">
             
             <button type="submit">Create Playlist</button>
         </form>

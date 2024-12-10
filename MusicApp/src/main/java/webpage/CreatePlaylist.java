@@ -45,8 +45,8 @@ public class CreatePlaylist extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 String title = request.getParameter("Playlist Title");
-         String dirtyContents = request.getParameter("Comma Separated List of Audio Titles");
+		 String title = request.getParameter("title");
+         String dirtyContents = request.getParameter("songTitle");
          if (title != null && !title.isEmpty()) {
              try {
              	PlaylistDAO playlist1DAO = new PlaylistDAO();
@@ -56,20 +56,29 @@ public class CreatePlaylist extends HttpServlet {
                  //make sure to handle exceptions and empty playlist content
                  Playlist newPlaylist = new Playlist(0, authorId, title); // Playlist ID will be auto-generated
                  int generatedId = playlist1DAO.addPlaylist(newPlaylist);
+                 //System.out.println(dirtyContents);
                  if (generatedId > 0) {
+                	 
                 	//separate dirtycontents into list of audio names
                      if(dirtyContents != null && !dirtyContents.isEmpty()){
                      	List<String> songTitles = Arrays.asList(dirtyContents.split("\\s*,\\s*"));
                      	for(String songtitle: songTitles){
+                     		System.out.println(songtitle);
                      		int audioid = ADAO.getAudioIdByTitle(songtitle);
+                     		System.out.println(audioid);
                      		if(audioid == -1){
                      			 String message = "Invalid title.";
                  				request.setAttribute("message", message);
                  				RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
                  				rd.forward(request, response);
                      		}
-                     		PlaylistContents songti = new PlaylistContents(0,newPlaylist.getPlaylistId(),audioid);
+                     		System.out.println("plist id: "+generatedId+"audioid "+audioid );
+                     		PlaylistContents songti = new PlaylistContents(generatedId,audioid);
                      		playlist1ContentsDAO.addPlaylistContents(songti);
+                     		String message = "Playlist created.";
+                     		request.setAttribute("message", message);
+                     		RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
+                     		rd.forward(request, response);
                      	}
                  } else {
                 	 String message = "Something went wrong";
