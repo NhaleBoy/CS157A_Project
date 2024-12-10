@@ -48,12 +48,12 @@ public class PlaylistContentsDAO extends Database{
     }
 
     // Retrieve order details by OrderID
-    public List<PlaylistContents> getPlaylistContentsByOrderId(int orderID) throws SQLException {
+    public List<PlaylistContents> getPlaylistContentsByPlaylistId(int playlistId) throws SQLException {
         List<PlaylistContents> playlistContentsList = new ArrayList<>();
-        String query = "SELECT * FROM PlaylistContents WHERE OrderID = ?";
+        String query = "SELECT * FROM PlaylistContents WHERE PlaylistId = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, orderID);
+            stmt.setInt(1, playlistId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 playlistContentsList.add(new PlaylistContents(

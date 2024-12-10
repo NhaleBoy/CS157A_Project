@@ -80,9 +80,8 @@
                         <p><strong>Contents:</strong></p>
                         <ul>
                             <% 
-                                List<PlaylistContents> audioNames = playlistDAO.getPlaylistContents(playlist.getPlaylistId());
-                                if (audioNames != null && !audioNames.isEmpty()) {
-                                    for (PlaylistContents playlistContent : audioNames) {
+                                if (contents != null && !contents.isEmpty()) {
+                                    for (PlaylistContents playlistContent : contents) {
                                     	String audioname = audioDAO.getAudioById(playlistContent.getAudioId()).getTitle();
                                     	
                             %>
