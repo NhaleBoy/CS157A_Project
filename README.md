@@ -10,6 +10,9 @@ We have created a database interface that can handle creating an account, signin
 - Make sure that mysql-connector-j-9.0.0.jar is located within src/main/webapp/WEB-INF/lib
 - Additionally download the audio files from https://drive.google.com/drive/folders/1G61eNG8tsjhl7idyLH27qcPxnON7QNk2?usp=sharing and put them within the src/main/webapp/upload directory
 - Run a MySQL server using XAMPP
+- in terminal run the following commands
+  ``cd c:\xampp\mysql\bin``
+``mysql.exe -u root --password`` and hit enter, then do ``create database musicapp\g`` and finally, ``use musicapp\g``
 - Run Apache Tomcat 10.1 server
 - Then run index.jsp located in src/main/webapp
 
